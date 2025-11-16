@@ -19,23 +19,22 @@ public class DeleteTodo extends HttpServlet {
             try{
                 taskOrder = Integer.parseInt(order);
             }catch (NumberFormatException ignored){
-                // Invalid input, taskOrder remains -1
+
             }
         }
 
         HttpSession session  = request.getSession(false);
 
-        // Ensure to initialize todoList to null only if session is null
+        // if list exists get it
         List<String> todoList = (session != null)
                 ? (List<String>) session.getAttribute("todoList")
                 : null;
 
         if(todoList != null && taskOrder >= 0 && taskOrder < todoList.size()){
-            // FIX: Use the integer index (taskOrder) instead of the String (order)
             todoList.remove(taskOrder);
         }
 
-        // FIX: Ensure redirect URL matches the display servlet mapping exactly
+        //redirects the user to DisplayTodo
         response.sendRedirect("DisplayTodo");
     }
 }

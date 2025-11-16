@@ -3,6 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>To-Do App</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #111;
+            color: #00ff99;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #222;
+            padding: 40px;
+            border: 1px solid #00ff99;
+            box-shadow: 0 0 20px #00ff99;
+            text-align: center;
+        }
+        a {
+            color: #00ccff;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            border: 1px solid transparent;
+            transition: border 0.3s;
+        }
+        a:hover {
+            border-bottom: 1px solid #00ccff;
+        }
+        h1, h2 {
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
     <h1>To-Do List App</h1>

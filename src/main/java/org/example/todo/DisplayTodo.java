@@ -33,22 +33,43 @@ public class DisplayTodo extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        out.println("<html><head><title>To-Do List</title></head><body>");
-        out.println("<h2>Current To-Do List</h2>");
+        out.println("<!DOCTYPE html>");
+        out.println("<html lang='en'>");
+        out.println("<head><title>System Status</title>");
+        out.println("<style>");
+        //Style
+        out.println("body { font-family: monospace; background-color: #111; color: #00ff99; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }");
+        out.println(".container { background-color: #222; padding: 40px; border: 1px solid #00ff99; box-shadow: 0 0 20px #00ff99; width: 80%; max-width: 600px; }");
+        out.println("a { color: #00ccff; text-decoration: none; }");
+        out.println("a:hover { text-decoration: underline; }");
+        out.println("h2 { border-bottom: 1px solid #00ff99; padding-bottom: 10px; margin-bottom: 20px; }");
+        out.println("li { margin-bottom: 10px; display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dotted #333; }");
+        out.println("ol { list-style: none; padding-left: 0; }");
+        out.println(".delete { color: #ff6666; font-weight: bold; }");
+        out.println("p b { color: #ff0099; }");
+        out.println("</style>");
+        out.println("</head>");
+        out.println("<body>");
 
-        // ... rest of the display code remains the same ...
-        out.println("<p>Number of tasks: <b>" + todoList.size() + "</b></p>");
+        out.println("<div class='container'>");
+        out.println("<h2>// CURRENT TASK QUEUE //</h2>"); // Futuristic heading
+
+        out.println("<p>Active Tasks: <b>" + todoList.size() + "</b></p>");
 
         if(todoList.isEmpty()){
-            out.println("<p>The list is empty</p>");
+            out.println("<p>[STATUS: IDLE] The task queue is empty.</p>");
         }else{
             out.println("<ol>");
             for (int i = 0; i<todoList.size(); i++){
-                out.println("<li>" + todoList.get(i) + " - <a href='DeleteTodo?taskOrder=" + i + "'>Delete</a></li>");
+                // Applied .delete class to the link
+                out.println("<li>" + todoList.get(i) +
+                        " <a href='DeleteTodo?taskOrder=" + i + "' class='delete'>[TERMINATE]</a></li>");
             }
             out.println("</ol>");
         }
-        out.println("<p><a href='index.html'>Go back to the main page</a></p>");
+        // Futuristic link text
+        out.println("<p><a href='index.html'>// RETURN TO INTERFACE //</a></p>");
+        out.println("</div>");
         out.println("</body></html>");
     }
 }
