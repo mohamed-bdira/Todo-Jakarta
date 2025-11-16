@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/DeleteTodo")
 public class DeleteTodo extends HttpServlet {
 
+    @SuppressWarnings("unchecked") // Recommended to suppress unchecked cast warning
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String order =  request.getParameter("taskOrder");
         int taskOrder = -1;
@@ -18,16 +19,23 @@ public class DeleteTodo extends HttpServlet {
             try{
                 taskOrder = Integer.parseInt(order);
             }catch (NumberFormatException ignored){
-
+                // Invalid input, taskOrder remains -1
             }
         }
 
         HttpSession session  = request.getSession(false);
-        List<String> todoList = (session != null) ? (List<String>) session.getAttribute("todoList") : null;
+
+        // Ensure to initialize todoList to null only if session is null
+        List<String> todoList = (session != null)
+                ? (List<String>) session.getAttribute("todoList")
+                : null;
 
         if(todoList != null && taskOrder >= 0 && taskOrder < todoList.size()){
-            todoList.remove(order);
+            // FIX: Use the integer index (taskOrder) instead of the String (order)
+            todoList.remove(taskOrder);
         }
-        response.sendRedirect("displayTodo");
+
+        // FIX: Ensure redirect URL matches the display servlet mapping exactly
+        response.sendRedirect("DisplayTodo");
     }
 }
