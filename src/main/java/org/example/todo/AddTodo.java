@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/AddTodo")
-public class AddTodo extends HttpServlet {
+public class AddTodo extends HttpServle {
 
     protected void doGet(HttpServletRequest  request, HttpServletResponse  response) throws ServletException, IOException {
         String newTaskName = request.getParameter("taskName");
